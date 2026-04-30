@@ -132,28 +132,28 @@ section {
 /* Footer */
 /* The unified blue section */
 .footer-cta {
-    position: relative; /* The crucial anchor for the copyright */
-    min-height: 100vh;  /* Forces the section to fill the screen */
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Centers the text vertically */
     align-items: center;
     text-align: center;
     background-color: var(--primary-blue);
     color: var(--text-white);
     width: 100%;
     box-sizing: border-box;
+    padding-bottom: 100px; /* Add space at bottom so text doesn't hit the copyright */
 }
 
 /* The copyright pinned to the bottom */
 .floor-bottom {
     position: absolute;
-    bottom: 20px;
-    left: 0;
-    width: 100%;
+    bottom: 20px; /* Distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Perfectly centers it */
+    width: 90%;
     text-align: center;
-    padding: 0;
-    margin: 0;
 }
 
 hr {
@@ -270,6 +270,15 @@ hr {
     /* Alternatively, add margin to the last card if padding doesn't work */
     .project-card:last-child {
         margin-bottom: 40px;
+    }
+    
+    .footer-cta {
+        min-height: 100svh; /* 'svh' stands for Small Viewport Height - better for mobile browsers */
+        padding: 80px 5% 120px; /* Ensure there is enough padding for the footer info */
+    }
+    
+    .footer-cta h2 {
+        font-size: 1.8rem; /* Shrink text slightly so it doesn't push the footer off-screen */
     }
 
     .is-active .bar:nth-child(2) { opacity: 0; }
