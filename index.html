@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laura | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="logo"><img src="https://i.imgur.com/lrrHqjd.png"></div>
+        <div class="nav-links" id="nav-menu">
+            <a href="#home">Home</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact me</a>
+        </div>
+        <!-- Restored Hamburger Menu -->
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <!-- 1. HOME SECTION (BLUE) -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm Laura</h1>
+            <p style="max-width: 500px; margin: 0 auto; padding-right: 20px;">
+                I can do database management and Excel data modeling, with a proven ability 
+                to translate complex technical systems for non-technical users.
+            </p>
+            <a href="https://canva.link/1xmh5finr9lv4ol" class="btn-contact">
+                Download CV <i class="fas fa-download"></i>
+            </a>
+        </div>
+        <div class="hero-img">
+            <div class="blob-mask">
+                <img src="https://i.imgur.com/L2ollou.png" alt="Laura's Profile">
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. PORTFOLIO SECTION (WHITE) -->
+    <section class="portfolio-section" id="portfolio">
+        <h2>Key Systems & Projects</h2>
+        <div class="portfolio-grid">
+            <a href="https://cpssn.org.au/library/" target="_blank" class="project-link">
+                <div class="project-card">
+                    <i class="fas fa-book-open fa-2x" style="color: var(--primary-blue);"></i>
+                    <h3>Library System Management</h3>
+                    <p>Developed using Google Apps Script and Google Sheets to manage specialized resources for parents. Designed to streamline access to critical guidance materials while maintaining high data integrity.</p>
+                </div>
+            </a>
+            <a href="https://sites.google.com/view/sjip-ict" target="_blank" class="project-link">
+                <div class="project-card">
+                    <i class="fas fa-tasks fa-2x" style="color: var(--primary-blue);"></i>
+                    <h3>Student Progress Portal</h3>
+                    <p>A custom-built platform for parents/ students secure access to assignment progress via unique IDs <i>(Username: SJIP0000, Password: SJIP0000)</i>. Focused on improving stakeholder communication through real-time data transparency.</p>
+                </div>
+            </a>
+            <a href="https://cpssn.org.au/membership-application/" target="_blank" class="project-link">
+                <div class="project-card">
+                    <i class="fas fa-user-plus fa-2x" style="color: var(--primary-blue);"></i>
+                    <h3>Membership Registration System</h3>
+                    <p>An automated workflow using MS Forms and Power Automate to sync data with Excel Online. Features custom email triggers for instant submission notifications and improved administrative efficiency.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- 3. CONTACT FOOTER (BLUE) -->
+    <section class="footer-cta" id="contact">
+        <div style="text-align-last: left; padding-bottom: 60px;">
+            <h2>Let's work on something awesome together. 😎</h2>
+            <a href="mailto:barclaylaura.94@gmail.com" class="footer-email">barclaylaura.94@gmail.com</a>
+        </div>
+        
+        <div class="floor-bottom">
+            <hr>
+            <p>© 2026 Laura. All Rights Reserved.</p>
+        </div>
+    </section>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const portfolioSection = document.getElementById('portfolio');
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        // Mobile Menu Toggle
+        menuToggle.addEventListener('click', () => {
+            const isActive = navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('is-active');
+
+            // Career Coach Tip: Disable scrolling when menu is open for a better UX
+            document.body.style.overflow = isActive ? 'hidden' : 'auto';
+        });
+
+        // Theme Switcher Logic (Covers Navbar AND Hamburger)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 1. Make navbar Blue with White text
+                    navbar.classList.add('blue-nav');
+                    // 2. Make hamburger bars Blue
+                    menuToggle.classList.add('blue-theme');
+                } else {
+                    // Reset to defaults
+                    navbar.classList.remove('blue-nav');
+                    menuToggle.classList.remove('blue-theme');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        if (portfolioSection) {
+            observer.observe(portfolioSection);
+        }
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('is-active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+/* 1. CORE RESET & VARIABLES */
+html { 
+    scroll-behavior: smooth; 
+}
+:root {
+    --primary-blue: #0067ff;
+    --bg-light: #ffffff;
+    --bg-card: #f8fafc;
+    --text-white: #ffffff;
+    --text-dark: #1a202c;
+    --transition: all 0.3s ease-in-out;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* 2. NAVIGATION - DEFAULT (WHITE BG / BLUE TEXT for Home & Contact) */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box; 
+    background-color: var(--bg-light);
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+nav .logo, nav .nav-links a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.logo img {
+    height: 60px; /* Adjust this value to make it larger or smaller */
+    width: auto;   /* This keeps the proportions correct so it doesn't stretch */
+    transition: all 0.3s ease; /* Optional: makes size changes smooth */
+}
+
+.nav-links a { margin-left: 2.5rem; }
+
+/* BLUE NAV STATE (For Portfolio Section) */
+nav.blue-nav {
+    background-color: var(--primary-blue);
+}
+nav.blue-nav .logo, nav.blue-nav .nav-links a {
+    color: var(--text-white);
+}
+/* Adjust mobile bars color when nav is blue */
+nav.blue-nav .bar { background-color: var(--text-white); }
+
+/* 3. MOBILE HAMBURGER STYLING */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-blue);
+    margin: 4px 0;
+    transition: 0.4s;
+    border-radius: 3px;
+}
+
+/* 4. SECTIONS */
+section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 10% 0;
+    box-sizing: border-box;
+}
+
+.hero, .footer-cta { background-color: var(--primary-blue); color: var(--text-white); }
+.portfolio-section { background-color: var(--bg-light); flex-direction: column; justify-content: center; }
+
+/* Base state for all cards */
+.project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover state */
+.project-card:hover {
+    transform: scale(1.05); /* Enlarges by 5% */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Adds depth when lifted */
+    z-index: 10; /* Ensures the card stays on top of others while enlarging */
+}
+/* Hero Specifics */
+.hero-content h1 { font-size: clamp(3rem, 8vw, 5rem); margin: 0; }
+.btn-contact {
+    background-color: var(--bg-light);
+    color: var(--primary-blue);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 2rem;
+    display: inline-block;
+}
+
+/* Blob Styling */
+.blob-mask {
+    width: 400px;
+    height: 400px;
+    background-color: var(--bg-light);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    overflow: hidden;
+    animation: morphing 10s ease-in-out infinite;
+}
+.blob-mask img { width: 100%; height: 100%; object-fit: cover; }
+@keyframes morphing {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+
+/* Portfolio Cards */
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; width: 100%; }
+.project-card { background: var(--bg-card); padding: 2rem; border-radius: 20px; text-align: center; }
+
+/* Footer */
+/* The unified blue section */
+.footer-cta {
+    position: relative; /* The crucial anchor for the copyright */
+    min-height: 100vh;  /* Forces the section to fill the screen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--primary-blue);
+    color: var(--text-white);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* The copyright pinned to the bottom */
+.floor-bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+hr {
+    height: 2px;
+    background-color: #fff;
+    border: none;
+    width: 90%;
+}
+
+.project-link {
+    text-decoration: none; /* Removes the default underline */
+    color: inherit;        /* Keeps the text dark/blue as you designed it */
+    display: block;        /* Ensures the link takes up the full card area */
+}
+
+/* Optional: Subtle visual cue that the card is clickable */
+.project-link:hover .project-card h3 {
+    text-decoration: underline;
+}
+
+.footer-email { font-size: clamp(1.5rem, 5vw, 3rem); color: white; border-bottom: 2px solid white; text-decoration: none; margin: 2rem 0; display: inline-block; }
+
+/* 5. RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    /* 1. Reset Nav for Mobile */
+    nav { 
+        padding: 0 5%; 
+        background-color: var(--bg-light) !important; /* Keep it white by default */
+    }
+
+    /* 2. Fixed Hamburger Icon */
+    .menu-toggle { 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+        z-index: 3000; /* Highest priority */
+        position: relative; 
+        width: 30px;
+        height: 30px;
+    }
+
+    .bar {
+        width: 100%;
+        height: 3px;
+        background-color: var(--primary-blue); /* Default blue */
+        margin: 3px 0;
+        transition: 0.4s;
+        border-radius: 5px;
+    }
+
+    /* 3. The Dark Overlay */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(26, 32, 44, 0.9); /* Reduced opacity per your request */
+        backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 2500; /* Sits under the hamburger toggle */
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        margin: 1.5rem 0;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-white) !important;
+        text-decoration: none;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary-blue) !important;
+    }
+
+    /* 4. Hamburger to "X" Animation & Color Change */
+    .is-active .bar {
+        background-color: var(--text-white) !important; /* Icon turns white when overlay is dark */
+    }
+    
+    /* This class is added by the script when scrolling into Portfolio */
+    .menu-toggle.blue-theme .bar {
+        background-color: var(--primary-blue) !important;
+    }
+    
+    /* This ensures that if the menu is OPEN, the icon stays white regardless of section */
+    .menu-toggle.is-active .bar {
+        background-color: var(--text-white) !important;
+    }
+    
+    /* Class to be added via JavaScript */
+    .menu-toggle.blue-icon .bar {
+        background-color: var(--primary-blue) !important;
+    }
+    
+    /* Ensure the icon remains white/visible when the menu is actually OPEN */
+    .menu-toggle.is-active .bar {
+        background-color: var(--text-white) !important;
+    }
+    
+    .portfolio-section {
+        padding-bottom: 60px; /* Adjust this value for more or less space */
+    }
+
+    /* Alternatively, add margin to the last card if padding doesn't work */
+    .project-card:last-child {
+        margin-bottom: 40px;
+    }
+
+    .is-active .bar:nth-child(2) { opacity: 0; }
+    .is-active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .is-active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    /* Fix Hero spacing for mobile */
+    .hero { flex-direction: column; text-align: center; padding-top: 100px; }
+    .blob-mask { width: 280px; height: 280px; margin-top: 2rem; }
+}
